@@ -1,0 +1,24 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  border-bottom: #fff;
+  box-shadow: 0px 0px 15px #fff;
+  padding: 0 20px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+
+  a {
+    color: #fff;
+    font-size: 30px;
+    text-transform: uppercase;
+  }
+}
+
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+}
