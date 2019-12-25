@@ -1,0 +1,129 @@
+.form-inline {
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  border-radius: 50px;
+
+  .form-control {
+    height: 55px;
+    width: 90%;
+    font-size: 22px;
+    letter-spacing: 2px;
+    font-stretch: 2px;
+    text-align: left;
+    border: none;
+    border-radius: 50px;
+    margin-right: auto;
+    margin-left: 0;
+
+    &:focus {
+      box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+      z-index: 100;
+    }
+  }
+}
+
+.extend {
+  transform: scale(1.05);
+}
+
+.btn-outline-dark {
+  border: 0 !important;
+  border-radius: 50px;
+  padding-right: 20px;
+  background-color: #f1f1f1;
+  box-shadow: none !important;
+
+  &:hover,
+  &:active,
+  &:not(:disabled):not(.disabled):active {
+    border: none;
+    background-color: #f1f1f1;
+    box-shadow: none !important;
+
+  }
+}
+
+.btn-outline-dark:disabled {
+  color: #fff
+}
+
+.fa-search {
+  color: #495057;
+  transform: rotateY(180deg);
+}
+
+.search-content {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+}
+
+.autocomplete-items {
+  position: absolute;
+  // border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  padding-left: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
