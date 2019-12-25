@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed:400,400i,700|Open+Sans+Condensed:300,300i,700&display=swap&subset=latin-ext');
+@import './navigation.scss';
+@import './search.scss';
+@import './citiesList.scss';
+
+* {
+    box-sizing: border-box !important;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+  
+  body {
+    background-image: url('../pictures/background.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  .show {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;  
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+
+  .no-matches {
+    color: #fff;
+    font-size: 47px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .citiesListBackground {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 40px auto;
+    width: 100%;
+  }
+ 
+  
