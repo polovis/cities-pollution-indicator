@@ -56,11 +56,13 @@ class CitiesList extends React.Component {
 
     displayCityInfo = (event) => {
         const city = event.currentTarget.firstElementChild.firstElementChild.innerText;
-        fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=city&srsearch=${city}_town_city&format=json&origin=*`)
+        // fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=city&srsearch=${city}_town_city&format=json&origin=*`)
+        fetch(`https://en.wikipedia.org/w/api.php?action=parse&page=${city}&format=json&origin=*`)
             .then(res => res.json())
             .then((data) => {
                 this.setState({
-                    description: data.query.search[0].snippet
+                    // description: data.query.search[0].snippet
+                    description: data.parse.text['*']
                 }, () => {
                     this.createCityInfo();
                 })
