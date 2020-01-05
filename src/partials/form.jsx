@@ -87,7 +87,7 @@ class FormField extends React.Component {
     setLocalStorage = (event) => {
         this.setState({
             inputValue: event.target.value
-        }, () => console.log(this.state.inputValue));
+        });
         if (this.localStorageTest()) {
             localStorage.setItem('myElement', event.target.value);
         }
