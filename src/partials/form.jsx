@@ -5,9 +5,15 @@ import FormControl from 'react-bootstrap/FormControl';
 import SearchButton from './searchButton';
 
 class FormField extends React.Component {
+    constructor(props) {  
+        super(props);      
+        this.state = {
+            inputValue: ''
+        }
+    }
 
     onSubmit = () => {
-        let country = document.getElementById('myInput').value.toUpperCase();
+        let country = this.state.inputValue.toUpperCase();
         let alpha2 = '';
 
         if (country === 'POLAND') {
@@ -79,6 +85,9 @@ class FormField extends React.Component {
     }
 
     setLocalStorage = (event) => {
+        this.setState({
+            inputValue: event.target.value
+        }, () => console.log(this.state.inputValue));
         if (this.localStorageTest()) {
             localStorage.setItem('myElement', event.target.value);
         }
@@ -87,7 +96,7 @@ class FormField extends React.Component {
     render() {
         return (
             <Form inline onSubmit={this.onSubmit} autoComplete='off' className='col-6 form' >
-                <FormControl type="text" placeholder="Enter country name..." className="sm-2" id='myInput' onFocus={this.enterCityName} onBlur={this.shrinkForm} onChange={this.setLocalStorage} />
+                <FormControl value={this.state.inputValue} type="text" placeholder="Enter country name..." className="sm-2" id='myInput' onFocus={this.enterCityName} onBlur={this.shrinkForm} onChange={this.setLocalStorage} />
                 <SearchButton sendData={this.onSubmit} />
             </Form>
         )
