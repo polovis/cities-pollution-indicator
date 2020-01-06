@@ -1,4 +1,5 @@
 import React from 'react';
+import City from './city';
 
 export const showCities = function () {
     const cities = document.querySelectorAll('.single-city')
@@ -85,16 +86,15 @@ class CitiesList extends React.Component {
         if (this.props.cities !== undefined) {
             cities = this.props.cities.map((city) => {
                 return (
-                    <div className='single-city col-3' key={city.location} onClick={this.displayCityInfo}>
-                        <div>
-                            <p>{city.city}</p>
-                            <p>{city.location}</p>
-                            <p>air condition:</p>
-                            <p>
-                                {city.measurements[0].parameter} ({city.measurements[0].value} {city.measurements[0].unit})
-                                </p>
-                        </div>
-                    </div>
+                    <City
+                        key={city.location}
+                        displayCityInfo={this.displayCityInfo}
+                        city={city.city}
+                        location={city.location}
+                        parametr={city.measurements[0].parameter}
+                        value={city.measurements[0].value}
+                        unit={city.measurements[0].unit}
+                    />
                 )
             });
         }
