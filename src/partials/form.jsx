@@ -11,7 +11,8 @@ class FormField extends React.Component {
         this.state = {
             countries: [],
             inputValue: localStorage.getItem('myElement'),
-            active: false
+            active: false,
+            extend: false
         }
     }
 
@@ -67,8 +68,10 @@ class FormField extends React.Component {
     enterCityName = (event) => {
         event.preventDefault();
         event.target.value = '';
-        document.querySelector('.form.form-inline').classList.toggle('extend');
         this.setLocalStorage(event);
+        this.setState({
+            extend: true
+        })
 
         const cityDescription = document.querySelector('.description-wrapper');
 
@@ -78,7 +81,9 @@ class FormField extends React.Component {
     }
 
     shrinkForm = () => {
-        document.querySelector('.form.form-inline').classList.toggle('extend');
+        this.setState({
+            extend: false
+        })
     }
 
     localStorageTest = () => {
@@ -139,7 +144,7 @@ class FormField extends React.Component {
 
         return (
             <div className='form-wrapper'>
-                <Form inline onSubmit={this.onSubmit} autoComplete='off' className='col-6 form' >
+                <Form inline onSubmit={this.onSubmit} autoComplete='off' className={`col-6 form ${this.state.extend? 'extend': ''}`} >
                     <FormControl value={this.state.inputValue} type="text" placeholder="Enter country name..." className="sm-2" id='myInput' onFocus={this.enterCityName} onBlur={this.shrinkForm} onChange={this.autocomplete} onInput={this.showCountries}/>
                     <SearchButton sendData={this.onSubmit} />
                 </Form>
