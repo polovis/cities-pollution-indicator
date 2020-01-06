@@ -3,16 +3,20 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import SearchButton from './searchButton';
+import Country from './country';
 
 class FormField extends React.Component {
     constructor(props) {  
         super(props);      
         this.state = {
-            inputValue: ''
+            countries: [],
+            inputValue: localStorage.getItem('myElement')
         }
     }
 
-    onSubmit = () => {
+    onSubmit = (event) => {
+        event.preventDefault();
+
         let country = this.state.inputValue.toUpperCase();
         let alpha2 = '';
 
@@ -93,12 +97,43 @@ class FormField extends React.Component {
         }
     }
 
+    autocomplete = (event) => {
+        let text = event.target.value;
+        let countries = this.getFilteredCountry(text);
+        this.setState({
+            countries
+        });
+
+        this.setLocalStorage(event);
+    }
+
+    getFilteredCountry = (text) => {
+        let countries = ['Poland', 'Germany', 'Spain', 'France']
+        return countries.filter(country => country.toLowerCase().includes(text.toLowerCase()))
+    }
+
+    selectCountry = (event) => {
+        this.setState({
+            inputValue: event.target.innerText
+        })
+    }
+
     render() {
+        let country;
+        country = this.state.countries.map(country => {
+            return (
+                <Country key={country} country={country} selectCountry={this.selectCountry} />
+            )
+        })
+
         return (
-            <Form inline onSubmit={this.onSubmit} autoComplete='off' className='col-6 form' >
-                <FormControl value={this.state.inputValue} type="text" placeholder="Enter country name..." className="sm-2" id='myInput' onFocus={this.enterCityName} onBlur={this.shrinkForm} onChange={this.setLocalStorage} />
-                <SearchButton sendData={this.onSubmit} />
-            </Form>
+            <div className='form-wrapper'>
+                <Form inline onSubmit={this.onSubmit} autoComplete='off' className='col-6 form' >
+                    <FormControl value={this.state.inputValue} type="text" placeholder="Enter country name..." className="sm-2" id='myInput' onFocus={this.enterCityName} onBlur={this.shrinkForm} onChange={this.autocomplete} onInput={this.showCountries}/>
+                    <SearchButton sendData={this.onSubmit} />
+                </Form>
+                <div className={`col-6 country-wrapper `}>{country}</div>
+            </div>
         )
     }
 }

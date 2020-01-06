@@ -3,9 +3,9 @@ import Button from 'react-bootstrap/Button';
 import { showCities } from './citiesList'
 
 class SearchButton extends React.Component {
-    sendData = () => {
+    sendData = (event) => {
         if(typeof this.props.sendData === 'function') {
-            this.props.sendData();
+            this.props.sendData(event);
         }
         showCities();
     }
