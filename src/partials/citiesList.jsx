@@ -60,12 +60,21 @@ class CitiesList extends React.Component {
         fetch(`https://en.wikipedia.org/w/api.php?action=parse&page=${city}&format=json&origin=*`)
             .then(res => res.json())
             .then((data) => {
-                this.setState({
-                    // description: data.query.search[0].snippet
-                    description: data.parse.text['*']
-                }, () => {
-                    this.createCityInfo();
-                })
+                if(data.parse !== undefined){
+                    this.setState({
+                        // description: data.query.search[0].snippet
+                        description: data.parse.text['*']
+                    }, () => {
+                        this.createCityInfo();
+                    })
+                } else {
+                    this.setState({
+                        // description: data.query.search[0].snippet
+                        description: 'City details are unavailable'
+                    }, () => {
+                        this.createCityInfo();
+                    })
+                }
             })
             .catch(err => console.log(err));
     }
