@@ -6,16 +6,20 @@ import SearchButton from './searchButton';
 import Country from './country';
 
 class FormField extends React.Component {
-    constructor(props) {  
-        super(props);      
+    constructor(props) {
+        super(props);
         this.state = {
             countries: [],
-            inputValue: localStorage.getItem('myElement')
+            inputValue: localStorage.getItem('myElement'),
+            active: false
         }
     }
 
     onSubmit = (event) => {
         event.preventDefault();
+        this.setState({
+            active: false
+        })
 
         let country = this.state.inputValue.toUpperCase();
         let alpha2 = '';
@@ -32,12 +36,12 @@ class FormField extends React.Component {
             alpha2 = '';
         } else {
             alpha2 = '*'
-        }        
+        }
 
-        if((country === 'POLAND') || (country === 'GERMANY') || (country === 'FRANCE') || (country === 'SPAIN')) {
+        if ((country === 'POLAND') || (country === 'GERMANY') || (country === 'FRANCE') || (country === 'SPAIN')) {
             document.querySelector('.citiesListBackground').classList.remove('hidden');
             document.querySelector('.no-matches').classList.add('hidden');
-        } else if (( country === '')) {
+        } else if ((country === '')) {
             document.querySelector('.citiesListBackground').classList.add('hidden');
             document.querySelector('.no-matches').classList.add('hidden');
         } else {
@@ -54,10 +58,10 @@ class FormField extends React.Component {
             })
             .catch(err => console.log(err));
 
-            if (this.localStorageTest()) {
-                localStorage.setItem('myElement', document.getElementById('myInput').value);
-            }
-            document.getElementById('myInput').value = localStorage.getItem('myElement');            
+        if (this.localStorageTest()) {
+            localStorage.setItem('myElement', document.getElementById('myInput').value);
+        }
+        document.getElementById('myInput').value = localStorage.getItem('myElement');
     }
 
     enterCityName = (event) => {
@@ -68,7 +72,7 @@ class FormField extends React.Component {
 
         const cityDescription = document.querySelector('.description-wrapper');
 
-        if(cityDescription !== null) {
+        if (cityDescription !== null) {
             cityDescription.parentElement.removeChild(cityDescription);
         }
     }
@@ -77,13 +81,13 @@ class FormField extends React.Component {
         document.querySelector('.form.form-inline').classList.toggle('extend');
     }
 
-    localStorageTest = () =>{
+    localStorageTest = () => {
         const test = "test" + new Date().valueOf();
         try {
             localStorage.setItem(test, test);
             localStorage.removeItem(test)
             return true;
-        } catch(e) {
+        } catch (e) {
             return false;
         }
     }
@@ -114,7 +118,14 @@ class FormField extends React.Component {
 
     selectCountry = (event) => {
         this.setState({
-            inputValue: event.target.innerText
+            inputValue: event.target.innerText,
+            active: false
+        })
+    }
+
+    showCountries = () => {
+        this.setState({
+            active: true
         })
     }
 
@@ -132,7 +143,7 @@ class FormField extends React.Component {
                     <FormControl value={this.state.inputValue} type="text" placeholder="Enter country name..." className="sm-2" id='myInput' onFocus={this.enterCityName} onBlur={this.shrinkForm} onChange={this.autocomplete} onInput={this.showCountries}/>
                     <SearchButton sendData={this.onSubmit} />
                 </Form>
-                <div className={`col-6 country-wrapper `}>{country}</div>
+                <div className={`col-6 country-wrapper ${this.state.active? "" : "hidden"}`}>{country}</div>
             </div>
         )
     }
